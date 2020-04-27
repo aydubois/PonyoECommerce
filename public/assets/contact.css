@@ -1,0 +1,11 @@
+.contactForm, .accountProfil{
+    width:50%;
+    margin:auto;
+    margin-bottom:2em;
+}
+.accountProfil div{
+    display: flex;
+}
+.accountProfil+p{
+    text-align: center;
+}
