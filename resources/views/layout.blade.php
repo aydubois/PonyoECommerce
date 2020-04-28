@@ -21,7 +21,9 @@
                     </div>
                     @include('menus.main_menu')
                 </div>
-            
+                @if (Auth::user())
+                <a type="button" class="btn btn-secondary" href="{{route('account.index')}}">{{Auth::user()->name}}</a>
+                @endif
             </div>
             
             <div class="hero container">
@@ -32,6 +34,7 @@
                         
                 </div> <!-- end hero -->
             </div>
+            
         </header>
 
         <div class="featured-section">

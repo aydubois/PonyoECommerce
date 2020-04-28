@@ -14,6 +14,10 @@ class Checkout extends Model
     public function billingAddress(){
         return $this->belongsTo(Address::class);
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
     public function productsWithQuantities(){
         return $this->hasMany(ProductWithQuantity ::class);
     }

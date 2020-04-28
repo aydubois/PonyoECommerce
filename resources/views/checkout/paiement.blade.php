@@ -50,7 +50,7 @@
         </div>
     </div>
     <div class="formPaiement">
-        <form action="{{ route('checkout.paie') }}" method="POST" id="payment-form">
+        <form action="{{ route('checkout.paie') }}" method="POST" id="payment-form" >
             @csrf
             <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="{{ env('STRIPE_PUB_KEY') }}" data-amount="1999" data-name="Stripe Demo"

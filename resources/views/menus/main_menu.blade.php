@@ -9,8 +9,16 @@
                 <li><a type="button" class="btn btn-secondary" href="{{route('category.index', ['id'=>'4'])}}">Ferme</a></li>
             </ul>
         </li>
-        <li><a type="button" class="btn btn-secondary" href="{{route('account')}}">Compte</a></li>
+        {{-- <li><a type="button" class="btn btn-secondary" href="{{route('account.index')}}">Compte</a></li> --}}
         <li><a type="button" class="btn btn-secondary" href="{{route('cart.index')}}">Panier</a></li>
-        {{-- <li><a type="button" class="btn btn-secondary" href="{{route('contact.index')}}">Contact</a></li> --}}
+
+        @if (!Auth::user())
+            <li><a type="button" class="btn btn-secondary" href="{{route('login')}}">Connexion</a></li>
+            <li><a type="button" class="btn btn-secondary" href="{{route('register')}}">Inscription</a></li>
+        @else
+            <li><a type="button" class="btn btn-secondary" href="{{route('logout')}}">Déconnexion</a></li>
+            <li><a type="button" class="btn btn-secondary" href="{{route('account.index')}}">Mon Compte</a></li>
+
+        @endif
     </ul>
 </nav>

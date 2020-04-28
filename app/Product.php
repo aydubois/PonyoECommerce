@@ -26,3 +26,5 @@ class Product extends Model
     }
 
 }
+
+//php artisan migrate:refresh --path=/database/migrations/fileName.php

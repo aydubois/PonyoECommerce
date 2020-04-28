@@ -11,6 +11,7 @@ use App\ProductWithQuantity;
 use Illuminate\Http\Request;
 use App\Mail\CheckoutCompletedMail;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -63,10 +64,18 @@ class CheckoutController extends Controller
         $retourStripe = app(Stripe1::class)->charge(request('stripeToken'), $cart->totalPriceInCents());
         
         if($retourStripe->paid === true && $retourStripe->status === "succeeded"){
-            $checkout = Checkout::create([
-                'card_last4' => $retourStripe->source->last4,
-                'billing_address_id' => $address->id ,
-            ]);
+            if(Auth::user()){
+                $checkout = Checkout::create([
+                    'card_last4' => $retourStripe->source->last4,
+                    'billing_address_id' => $address->id ,
+                    'user_id' => Auth::user()->id,
+                ]);
+            }else{
+                $checkout = Checkout::create([
+                    'card_last4' => $retourStripe->source->last4,
+                    'billing_address_id' => $address->id ,
+                ]);
+            }
                 
             //pour chaque produit du panier ->enregistrement
             Cart::fromSession()->each(function($productWithQuantity) use ($checkout){
@@ -76,7 +85,6 @@ class CheckoutController extends Controller
             
             Mail::to(request("stripeEmail"))->send(new CheckoutCompletedMail($checkout, Address::find($address->id) )) ;
 
-            //suppression de la commande dans la session si pas d'authentification
             session()->forget('cart');
 
             return view('checkout.valid')->with(['last4'=>$retourStripe->source->last4, 'name'=>$address->name1, 'email'=>\request('stripeEmail')]);

@@ -8,11 +8,11 @@
 
         <p>{{$product['name']}}</p>
         <p>qté : {{$product['quantity']}}</p>
-        <p>ss total : {{$product['price_in_cents']/100}} </p>
+        <p>ss total : {{$product['price_in_cents']/100}} euros</p>
     </div>
         @endforeach
 </div>
-<p><em>Total : </em><strong>{{$total}}</strong></p>
+<p><em>Total : </em><strong>{{$total/100}} euros</strong></p>
 
 
 @endsection   

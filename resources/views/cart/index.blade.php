@@ -37,7 +37,7 @@
 </div>
 @endforeach
 
-<div class="paiement" style="display: flex;flex-direction:column;align-items:center;">
+<div class="paiement" style="display:flex;flex-direction:column;align-items:center;">
     <p>Total = {{App\Cart::getTotalPrice()}} euros</p>
     <a class='button' href="{{route('checkout.index')}}">Passer à l'étape suivante</a>
 </div>
