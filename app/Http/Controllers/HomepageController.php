@@ -9,7 +9,7 @@ class HomepageController extends Controller
 {
     public function index(){
 
-        $products = Product::inRandomOrder()->take(9)->get();
+        $products = Product::inRandomOrder()->take(6)->get();
         return view('homepage.index')->with('products', $products);
     }
 }

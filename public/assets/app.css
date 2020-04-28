@@ -1,3 +1,15 @@
+div.pagination{
+    display: flex;
+}
+div.stepValid{
+    background-color: green;
+}
+div.enCours{
+    background-color: yellow;
+}
+div.enAttente{
+    background-color: rgb(220, 95, 95);
+}
 html,
 body,
 div,
@@ -946,11 +958,11 @@ header .top-nav-right {
     align-items: center;
 }
 
-footer {
+/* footer {
     background: #535353;
     color: #e9e9e9;
     padding: 40px 0;
-}
+} */
 
 .footer-content {
     display: flex;
@@ -977,7 +989,7 @@ footer {
 
 .featured-section .products {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 60px 30px;
 }
 

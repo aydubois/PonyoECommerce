@@ -15,10 +15,12 @@ Route::patch('/cart', 'CartController@update')->name('cart.update'); //mise à j
 Route::delete('/cart', 'CartController@delete')->name('cart.delete'); //suppression d'un produit
 
 Route::get('/checkoutform', 'CheckoutController@index')->name('checkout.index'); //facture
+Route::post('/checkoutpaiement', 'CheckoutController@paie')->name('checkout.paie');//paiement avec stripe
+Route::get('/checkout/recap/{id?}', 'CheckoutController@recap')->name('checkout.recap');
 Route::post('/checkout', 'CheckoutController@store')->name('checkout.store'); //facture
 
 
-Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/account', 'accountController@index')->name('account');
-Route::get('/account/profil/{id?}', 'accountController@show')->name('account.show');
+// Auth::routes();
+// Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/account', 'AccountController@index')->name('account');
+// Route::get('/account/profil/{id?}', 'AccountController@show')->name('account.show');

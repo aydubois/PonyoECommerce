@@ -1,12 +1,12 @@
 @component('mail::message')
-# Introduction
+# Bonjour {{$address->name1}}, 
 
-The body of your message.
+Pour voir le récapitulatif de votre commande, cliquez sur le bouton suivant : 
 
-@component('mail::button', ['url' => ''])
-Button Text
+@component('mail::button', ['url' => $checkout])
+Récapitulatif
 @endcomponent
 
-Thanks,<br>
+Merci de nous faire confiance,<br>
 {{ config('app.name') }}
 @endcomponent

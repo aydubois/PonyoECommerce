@@ -14,9 +14,6 @@ class CategoryController extends Controller
         $listingProductsCategory = Product::where('category_id', $category->id)->paginate(9);
         return view('categories.list_products', ['category'=> $category, 'listingProductsCategory'=>$listingProductsCategory]);
         
-        // }else{
-        //     return view('categories.error');
-        // }
     }
 
 
