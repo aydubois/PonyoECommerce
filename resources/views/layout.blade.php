@@ -5,30 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{{ asset('assets/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/header.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/categories.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/footer.css') }}">
+    
+    <link rel="stylesheet" href="{{ asset('assets/base.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/layout.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/responsive.css') }}">
+
+
 </head>
 
 <body>
 
     <div id="app">
-        <header class="with-background">
+        <header>
             <div class="top-nav container">
                 <div class="top-nav-left">
-                    <div class="logo">
-                    </div>
                     @include('menus.main_menu')
+                    <div>
+                        @if (Auth::user())
+                        <a type="button" class="btn btn-secondary" href="{{route('account.index')}}">{{Auth::user()->name}}</a>
+                        @endif
+                    </div>
                 </div>
-                @if (Auth::user())
-                <a type="button" class="btn btn-secondary" href="{{route('account.index')}}">{{Auth::user()->name}}</a>
-                @endif
             </div>
             
             <div class="hero container">
                 <div class="hero-copy">
-                    <h1>Ponyo Ecommerce </h1>
+                    <h1><img src="{{asset('pictures/ponyo.png')}}" alt="logo ponyo e-commerce" class="logo">Ponyo Ecommerce </h1>
                     <p>Venez adopter des animaux en tout genre. Que vous soyez plutôt du style féérique ou que vous
                         aimiez les petites bêtes, Ponyo E-commerce est fait pour vous !!</p>
                         

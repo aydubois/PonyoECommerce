@@ -1,33 +1,47 @@
 @extends('layout')
 @section('featured-section')
 
-<h2>Historique de mes dernières commandes</h2>
-<div class="allOrders" style="border:1px solid blue;">   
-    @foreach ($checkouts as $value => $key)
-     
-       <div class="order" style="border:1px solid red;">
-        @if ( is_array($key) )
-            
-            @foreach ($key as $data)
-                @if( !is_array($data) && !is_integer($data) )<p>Date de la commande :  {{$data}} <p>@endif
 
-                @if ( is_array($data) )
+<section class="accountSection">
+    <nav class="sidebar">
+        <ul>
+            <li class="active"><a href="{{ route('account.index') }}">Mon profil</a></li>
+            <li><a href="{{ route('account.orders', ['id'=> Auth::user()->id]) }}">Mes commandes</a></li>
+        </ul>
+    </nav> <!-- end sidebar -->
+    <div class="profile">
+        <h1>Historique de mes commandes</h1>
+        <div class="allOrders">
+            @foreach ($checkouts as $value => $key)
+            <div class="order">
+                <span class="orderNb">Commande n°{{$value + 1}} </span>
+                @if ( is_array($key) )
 
-                    @foreach ($data as $dt)
-                
-                    
-                        <p>Commande n° {{$dt['checkout']}} </p>
-                        <p> Article : {{$dt['nameProduct']}} </p>
-                        <p> Quantité : {{$dt['quantity']}} </p>
-                        <p><span> Sous-total : {{$dt['price']*$dt['quantity']/100}} euros</span><p>
+                    @foreach ($key as $data)
+                        @if( !is_array($data) && !is_integer($data) )<p class="date">Date de la commande : {{$data}} <p></div>
+                        @endif
+
+                        @if ( is_array($data) )
+                            <div>
+                            @foreach ($data as $dt)
+                            <div class="orderDetail">
+                                <p> Article : {{$dt['nameProduct']}} </p>
+                                <p> Quantité : {{$dt['quantity']}} </p>
+                                <span> Sous-total : {{$dt['price']*$dt['quantity']/100}} euros</span>
+                            </div>
+                            @endforeach
+                        </div>
+                        @endif
+
+                        @if( !is_array($data) && is_integer($data) )<div class="orderTotal"><strong> Total : {{$data/100}} euros
+                                </strong>
+                        @endif
                     @endforeach
                 @endif
-            
-                @if( !is_array($data) && is_integer($data) )<strong> Total : {{$data/100}} euros </strong>@endif 
+            </div>
+
             @endforeach
-        @endif
-        </div>
-    
-    @endforeach
-</div>
+        </>
+    </div>
+</section>
 @endsection

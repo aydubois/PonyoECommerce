@@ -107,7 +107,7 @@ class CheckoutController extends Controller
             'quantity'=> $data->quantity, 
             'price_in_cents'=>$product->price_in_cents]);
             
-            $total += $product->price_in_cents;
+            $total += $product->price_in_cents*$data->quantity;
         }
         // dd($array);
         return view('checkout.recap', ['listingProducts' => $array, 'total'=>$total]);

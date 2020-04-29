@@ -25,6 +25,6 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        return view('home');
+        return view('home_landing');
     }
 }

@@ -21,29 +21,7 @@ Route::post('/checkout', 'CheckoutController@store')->name('checkout.store'); //
 
 
 Auth::routes();
-Route::get('/account', 'AccountController@index')->name('account.index');
-// Route::post('/account', 'AccountController@index')->name('account.update');
-Route::patch('/account', 'AccountController@update')->name('account.update');
-
-Route::get('/account/{id?}/orders', 'AccountController@orders')->name('account.orders');
-
-
-// Registered and Activated User Routes
-Route::group(['middleware' => ['auth']], function () {
-
-    //  Homepage Route - Redirect based on user role is in controller.
-    Route::get('/home', ['as' => 'public.home',   'uses' => 'UserController@index'])->name('home');
-
-    // Show users profile - viewable by other users.
-    // Route::get('profile/{username}', [
-    //     'as'   => '{username}',
-    //     'uses' => 'ProfilesController@show',
-    // ]);
-
-    Route::get('/logout', ['uses' => 'Auth\LoginController@logout'])->name('logout');
-
-});
-
-// Route::get('/home', 'HomeController@index')->name('home');
-// Route::get('/account', 'AccountController@index')->name('account');
-// Route::get('/account/profil/{id?}', 'AccountController@show')->name('account.show');
+Route::get('/account', 'AccountController@index')->name('account.index')->middleware('auth');
+Route::patch('/account', 'AccountController@update')->name('account.update')->middleware('auth');
+Route::get('/account/{id?}/orders', 'AccountController@orders')->name('account.orders')->middleware('auth');
+Route::get('/logout', ['uses' => 'Auth\LoginController@logout'])->name('logout')->middleware('auth');

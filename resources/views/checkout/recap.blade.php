@@ -2,17 +2,17 @@
 @section('featured-section')
 
 
-<div class="flex" style="display:flex;width:70%;margin:auto;justify-content:space-between;">
+<div class="allOrders Cart">
         @foreach ($listingProducts as $product)
-    <div>
+    <div class="order flex Recap">
 
         <p>{{$product['name']}}</p>
         <p>qté : {{$product['quantity']}}</p>
-        <p>ss total : {{$product['price_in_cents']/100}} euros</p>
+        <p>ss total : {{$product['price_in_cents']*$product['quantity']/100}} euros</p>
     </div>
         @endforeach
 </div>
-<p><em>Total : </em><strong>{{$total/100}} euros</strong></p>
+<div class="paiement"><p>Total : {{$total/100}} euros</p></div>
 
 
 @endsection   

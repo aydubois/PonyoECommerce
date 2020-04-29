@@ -1,0 +1,443 @@
+/*//////GENERAL DESIGN////////*/
+html{
+    --primary:#FFFBFA;
+    --secondary:#F1E3DC;
+    --terciary : #C2B3AC;
+    --primaryFont:rgb(0, 0, 0); 
+    --secondaryFont:#222121;
+    --terciaryFont:#948E8E;
+    --quaternyFont:white;
+}
+.breadcrumb{
+    text-align: start;
+    width: 100%;
+    display: inline-block;
+    padding-inline-start: 1em;
+}
+/*/////END GENERAL DESIGN /////*/
+
+
+/*////////// CARD PRODUCT ///////////*/
+
+.wrapper{
+    width: 300px;
+    height: 400px;
+    background: white;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0;
+    transform: scale(0.95);
+    transition: box-shadow 0.5s, transform 0.5s;
+    border: 1px solid var(--secondary);
+}
+.wrapper:hover{
+    transform: scale(1);
+    box-shadow: 5px 20px 30px rgba(0,0,0,0.2);
+}
+    
+.wrapper .container{
+    width:100%;
+    height:100%;
+}
+.wrapper .container .top{
+    height: 80%;
+    width:100%;
+}
+.wrapper .container .top img{
+    height: 100%;
+    width:100%;
+}
+.wrapper .container .bottom{
+    width: 100%;
+    height: 20%;
+    border-top: var(--secondary) 1px solid;
+}
+.wrapper .container h2{
+    margin:0;
+    padding:0;
+}
+.wrapper .container p{
+    margin:0;
+    padding:0;
+}
+
+.wrapper .container .details{
+    padding: 20px;
+    float: left;
+    width: calc(70% - 40px);
+}
+.wrapper .container .viewPlus{
+    float:right;
+    width: calc(30% - 2px);
+    height:100%;
+    background: var(--secondary);
+    padding:10%;
+}
+.wrapper .container .viewPlus:hover{
+    background: var(--terciary);
+}
+
+/*/////////// END CARD PRODUCT ////////////*/
+
+/*/////// DISPLAY LIST PRODUCTS //////////////*/
+.manyProducts, .allCategories{
+    display: flex;
+    flex-wrap: wrap;
+    width: 56%;
+    margin: auto;
+    margin-bottom: 3em;
+}
+
+.manyProducts.homePage{
+    margin-top: 5em;
+    margin-bottom: 3em;
+
+}
+.containerhomePage{
+    margin-bottom: 3em;
+}
+.allCategories{
+    width:35%;
+}
+.allCategories .bottom{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary);
+}
+/*/////// END DISPLAY LIST PRODUCTS ///////////*/
+
+
+
+/*/////// ONE PRODUCT ///////////*/
+.oneProductSection{
+    width: 80%;
+    margin:auto;
+    margin-bottom: 5em;
+}
+.oneProductSection div{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.oneProductSection article:first-child{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.oneProductSection article{
+    max-width: 50%;
+}
+.oneProductSection article img{
+    width: initial;
+    border: 1px var(--secondary) solid;
+    border-radius: 19px;
+    box-shadow: var(--terciary) 5px 5px 5px;
+    margin-right: 1em;
+}
+.oneProductSection div p{
+    margin:1em 0;
+    text-align: start;
+}
+.oneProductSection article input[type='number']{
+    width: 40px;
+    margin-left:.5em;
+    margin-right:.5em;
+    border:1px solid var(--terciary);
+    border-radius: 5px;
+}
+/*/////// END ONE PRODUCT ///////////*/
+
+
+/*//////////// ACCOUNT //////////////*/
+.accountSection .sidebar>ul{
+    display: flex;
+    justify-content: space-between;
+    width: 22%;
+    margin: auto;
+}
+.accountSection .sidebar>ul li, .accountSection .formAccount button[type='submit']{
+    padding: 5px;
+    border: 1px solid var(--terciary);
+    border-radius: 10px;
+    background-color: var(--secondary);
+    transform: scale(0.95);
+    transition: box-shadow 0.5s, transform 0.5s;
+}
+.accountSection .formAccount button[type='submit']{
+    background-color: var(--terciary);
+    color: var(--secondaryFont);
+    padding-left: 10em;
+    padding-right: 10em;
+    margin-left: 20%;
+}
+.accountSection .sidebar>ul li:hover , .accountSection .formAccount button[type='submit']:hover{
+    transform: scale(1);
+    box-shadow: 6px 6px 5px rgba(0,0,0,0.2);
+}
+.accountSection .formAccount button[type='submit']:hover{
+    box-shadow: none;
+}
+.profile{
+    margin-top: 3em;
+    margin-bottom: 4em;
+}
+.profile .formAccount{
+    width: 57%;
+    border: 3px solid var(--terciary);
+    border-radius: 5px;
+    margin: auto;
+    padding: 1em;
+    background-color: var(--secondary);
+}
+.accountSection.Login{
+    width: 35%;
+    margin: auto;
+
+}
+.accountSection.Login form{
+    width: 70%;
+    margin: auto;
+}
+.accountSection.Login input[type='submit']{
+    background-color: var(--terciary);
+    color: var(--primary);
+    border-radius: 5px;
+}
+.accountSection.Login input[type='submit']:hover{
+    background-color: var(--primary);
+    color: var(--terciary);
+}
+.profile .formAccount form{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-right: auto;
+}
+.profile .formAccount .half-form{
+    width: 100%;
+}
+.profile .formAccount label{
+    text-align: right;
+    font-size: .9em;
+    padding-top: 8px;
+}
+.profile .formAccount .form-group span{
+    font-size: 0.7em;
+    color: var(--secondaryFont);
+}
+
+.profile .allOrders .order>div{
+    display: flex;
+    justify-content: space-evenly;
+    margin:auto;
+}
+.profile .allOrders .order{
+    border:1px solid var(--secondary);
+    border-radius: 5px;
+    margin-top: 3em;
+}
+.profile .allOrders .orderTotal{
+    justify-content: space-between;
+    width: 50%;
+    border-top: 1px solid var(--terciary);
+}
+.profile .allOrders .orderTotal{
+    font-weight: bold;
+}
+.profile .allOrders .order .orderNb{
+    color:var(--secondaryFont);
+}
+.profile .allOrders .orderTotal .date{
+    font-size: .9em;
+    font-weight: normal;
+    padding-inline-start: 10em;
+    color: var(--terciary);
+}
+.profile .formAccount.Register {
+    width: 75%;
+}
+
+/*//////////// END ACCOUNT ///////////////*/
+
+/*/////////////  CART  /////////////////*/
+.emptyCart{
+    margin-top:3em;
+    margin-bottom:3em;
+}
+.emptyCart>p{
+    margin-bottom: 1em;
+}
+.allOrders.Cart{
+    margin-top: 4em;
+}
+.allOrders.Cart img{
+    width: 125px;
+}
+.allOrders.Cart .flex{
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+.allOrders.Cart .formsCart{
+    margin: 0;
+}
+.allOrders.Cart .order.flex{
+    justify-content: space-around;
+    border: 1px solid var(--terciary);
+    padding: .5em 0;    
+}
+.allOrders.Cart input[type='submit']{
+    background-color: var(--terciary);
+    color: var(--secondaryFont);
+    padding: 2px 8px;
+    margin-right: 5px;
+}
+.allOrders.Cart input[type='submit']:hover{
+    background-color: var(--secondary);
+    color: var(--secondaryFont);
+}
+.allOrders.Cart .flex.Recap{
+    justify-content: center;
+    width: 70%;
+    padding:.2em 1em;
+}
+.allOrders.Cart .flex.Recap p {
+    width:35%;
+}
+.allOrders.Cart .formsCart{
+    font-size: .8em;
+}
+.allOrders.Cart .formsCart input[type='number']{
+    width: 40px;
+    margin-left:.5em;
+    margin-right:.5em;
+    border:1px solid var(--terciary);
+    border-radius: 5px;
+}
+.allOrders.Cart+.paiement{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+.allOrders.Cart+.paiement>p{
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: .5em 0;
+}
+.allOrders.Cart+.paiement>a{
+    margin: 1em 0;
+}
+
+.checkout .formAccount form{
+    margin:auto;
+}
+.recapitulatifSection>div{
+    display: flex;
+    width: 80%;
+    margin: auto;
+    justify-content: center;
+}
+.recapitulatifSection>div>div{
+    width: 50%;
+    margin: auto;
+}
+.recapitulatifSection .recapPanier>div, .recapBilling{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    border:1px solid var(--secondary);
+    justify-content: space-between;
+    padding:1em;
+}
+.recapBilling .sousSection{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: max-content;
+    border-radius: 5px;
+    background-color: var(--secondary);
+    padding: 1em;
+}
+.recapBilling{
+    margin-left: 1em;
+    border:none;
+}
+.recapitulatifSection .recapPanier>div img{
+    width: 50px;
+}
+.recapBilling .form-group{
+    display: flex;
+}
+.recapBilling .form-group label{
+    margin-right: .1em;
+}
+.recapitulatifSection .formPaiement{
+    margin-top: 2em;
+    margin-bottom: 3em;
+}
+.recapitulatifSection .formPaiement .stripe-button-el {
+    width: 150%;
+    height: 150%;
+    background-color: var(--secondary);
+    background-image: none;
+}
+.recapitulatifSection .formPaiement .stripe-button-el span {
+    background-color: var(--secondary);
+    background-image: none;
+    border: none;
+    font-size: 1.3em;
+    box-shadow: none;
+    color: var(--terciary);
+}
+.recapitulatifSection .formPaiement .stripe-button-el:hover span, .recapitulatifSection .formPaiement .stripe-button-el:hover{
+    background-color: var(--terciary);
+    color: var(--primary);
+
+}
+
+.validation{
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+.validation>div{
+    text-align: center;
+    margin: 1em;
+}
+.validation div p{
+    margin:5em;
+}
+.validation div a {
+    display: block;
+    background-color: var(--terciary);
+    color: var(--secondaryFont);
+    padding: 2px 8px;
+    margin-right: 5px;
+}
+.validation div a:hover {
+    background-color: var(--secondary);
+    color: var(--secondaryFont);
+}
+.checkStep{
+    display: flex;
+    justify-content:space-between;
+    width:80%;
+    margin:auto;
+}
+.checkStep div{
+    border: 1px solid var(--secondary);
+    border-radius: 5px;
+    padding: .3em;
+}
+.checkStep .enCours{
+    background-color: #ffff435c;
+}
+.checkStep .enAttente{
+    background-color: #ff28285c;
+}
+.checkStep .stepValid{
+    background-color: #64e80a7d;
+}
+/*////////// END CART  /////////////////*/

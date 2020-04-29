@@ -1,4 +1,4 @@
-<div class="flex " style="display: flex;justify-content:space-between;width:80%;margin:auto;">
+<div class="checkStep">
     <div class="ValidationPanier {{$etape1}}" style="border: 1px black solid;">
         <h3>Etape 1 :</h3>
         <p>Validation du panier</p>

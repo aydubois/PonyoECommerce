@@ -3,7 +3,7 @@
 
 
 
-<div class="container">
+<section class="containerMessages">
     @if (session()->has('success_message'))
         <div class="alert alert-success">
             {{ session()->get('success_message') }}
@@ -19,46 +19,53 @@
             </ul>
         </div>
     @endif
-</div>
+</section>
 
-<div class="products-section container">
-    <div class="sidebar">
+<section class="accountSection">
+    <nav class="sidebar">
 
         <ul>
           <li class="active"><a href="{{ route('account.index') }}">Mon profil</a></li>
           <li><a href="{{ route('account.orders', ['id'=> Auth::user()->id]) }}">Mes commandes</a></li>
         </ul>
-    </div> <!-- end sidebar -->
-    <div class="my-profile">
-        <div class="products-header">
-            <h1 class="stylish-heading">Modifier mon profil</h1>
-        </div>
+    </nav> <!-- end sidebar -->
+    <div class="profile">
 
-        <div>
+            <h1>Modifier mon profil</h1>
+
+
+        <div class="formAccount">
             <form action="{{ route('account.update') }}" method="POST">
                 @method('patch')
                 @csrf
-                <div class="form-control">
-                    <input id="name" type="text" name="name" value="{{ old('name', $user->name) }}" placeholder="Name" required>
+                <div class="form-group">
+                    <div class="half-form">
+                        <label for="name"> Identifiant : </label>
+                        <input id="name" type="text" name="name" value="{{ old('name', $user->name) }}" placeholder="Name" required>
+                    </div>
+                    <div class="half-form"">
+                        <label for="email"> Email : </label>
+                        <input id="email" type="email" name="email" value="{{ old('email', $user->email) }}" placeholder="Email" required>
+                    </div>
                 </div>
-                <div class="form-control">
-                    <input id="email" type="email" name="email" value="{{ old('email', $user->email) }}" placeholder="Email" required>
-                </div>
-                <div class="form-control">
-                    <input id="password" type="password" name="password" placeholder="Password">
-                    <div>Laisse le mot de passe vide pour le garder.</div>
-                </div>
-                <div class="form-control">
-                    <input id="password-confirm" type="password" name="password_confirmation" placeholder="Confirm Password">
+                <div class="form-group">
+                    <span>Laisse les mots de passe vides si tu ne souhaite pas le modifier.</span>
+                    <div class="half-form">
+                        <label for="password"> Nouveau mot de passe : </label>
+
+                        <input id="password" type="password" name="password" placeholder="Password">
+                    </div>
+                    <div class="half-form">
+                        <label for="password-confirm"> Confirmation du nouveau mot de passe : </label>
+                        <input id="password-confirm" type="password" name="password_confirmation" placeholder="Confirm Password">
+                    </div>
                 </div>
                 <div>
-                    <button type="submit" class="my-profile-button">Modifier</button>
+                    <button type="submit">Modifier</button>
                 </div>
             </form>
         </div>
-
-        <div class="spacer"></div>
     </div>
-</div>
+</section>
 
 @endsection
