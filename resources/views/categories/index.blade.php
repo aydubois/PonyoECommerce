@@ -7,7 +7,7 @@
             <a href="{{ route('category.index', ['id'=>$list->id]) }}">
                 <div class="container">
                     <div class="top">
-                        <img class="card-img-top" src="/pictures/{{ $list->name_category }}.png"
+                        <img class="card-img-top" src="{{asset('pictures/'.$list->name_category.'.png') }}"
                         alt="Image de {{$list->name_category}}">
                     </div>
                     <div class="bottom">

@@ -10,7 +10,7 @@
         <a href="{{ route('products.show', ['id'=> $product->id]) }}">
             <div class="container">
                 <div class="top">
-                    <img class="card-img-top" src="/pictures/{{$product->image}}" alt="Image de {{$product->title}}">
+                    <img class="card-img-top" src="{{asset('pictures/'.$product->image) }}" alt="Image de {{$product->title}}">
                 </div>
                 <div class="bottom">
                     <div class="details">

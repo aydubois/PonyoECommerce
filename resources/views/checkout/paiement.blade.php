@@ -5,7 +5,7 @@
 'enAttente'])
 
 <section class="recapitulatifSection">
-    @isset ($errors )
+    @if ($errors->any() )
 <section class="containerMessages">
     <div class="alert alert-danger">
         <p>Une erreur s'est produite lors du paiement.<br/>
@@ -13,14 +13,14 @@
         </p>
     </div>
 </section>
-@endisset
+@endif
     <h1>Récapitulatif de la commande</h1>
     <div>
         <div class="recapPanier">
             @foreach ($productsWithQuantities as $product)
             <div>
                 <h2>{{$product->product->title}}</h2>
-                <img class="card-img-top" src="/pictures/{{$product->product->image}}"
+                <img class="card-img-top" src="{{asset('pictures/'.$product->product->image) }}"
                     alt="Image de {{$product->product->title}}">
                 <p>Quantité : {{$product->quantity}}</p>
                 <p>Prix : {{$product->product->price_in_cents*$product->quantity/100}} euros</p>

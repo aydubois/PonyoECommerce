@@ -13,7 +13,7 @@
     <h1>{{$product->title}}</h1>
     <div>
         <article>
-            <img src="/pictures/{{$product->image}}" alt="Image de {{$product->title}}"
+            <img src="{{asset('pictures/'.$product->image) }}" alt="Image de {{$product->title}}"
             style="width: 25rem; ">
         </article>
         <article>

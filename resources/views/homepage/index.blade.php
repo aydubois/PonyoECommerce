@@ -5,7 +5,7 @@
     @if(URL::previous() == URL::route('login'))
     <h2 style="text-align:center;">Bonjour {{Auth::user()->name}}</h2>
     @endif
-    <p class="section-description">&#9888; Vu la situation actuelle due au confinement générale,<br/> nous avons décidés de
+    <p class="section-description">&#9888; AAAAAA - Vu la situation actuelle due au confinement générale,<br/> nous avons décidés de
         baisser nos prix afin que vous puissiez profiter de tout l'amour de nos animaux. <br/> Profitez-en ! &#9888;</p>
 
     <div class="manyProducts homePage">
@@ -15,7 +15,7 @@
             <a href="{{ route('products.show', ['id'=> $product->id]) }}">
                 <div class="container">
                     <div class="top">
-                        <img class="card-img-top" src="/pictures/{{ $product->image }}"
+                        <img class="card-img-top" src="{{asset('pictures/'.$product->image) }}"
                             alt="Image de {{$product->title}}">
                     </div>
                     <div class="bottom">

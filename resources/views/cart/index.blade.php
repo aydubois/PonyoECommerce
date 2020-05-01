@@ -19,7 +19,7 @@
     @foreach ($productsWithQuantities as $productWithQuantity)
     <div class="order flex">
         <h2>{{$productWithQuantity->product->title}}</h2>
-        <img src="/pictures/{{$productWithQuantity->product->image}}"
+        <img src="{{asset('pictures/'.$productWithQuantity->product->image) }}"
             alt="Image de {{$productWithQuantity->product->title}}">
         <p>Quantité : {{$productWithQuantity->quantity}}</p>
         <p>Prix : {{$productWithQuantity->product->price_in_cents*$productWithQuantity->quantity/100}} euros</p>
