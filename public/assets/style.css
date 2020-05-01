@@ -15,7 +15,49 @@ html{
     padding-inline-start: 1em;
 }
 /*/////END GENERAL DESIGN /////*/
+/*////// Checkbox ////////*/
 
+.toggle {
+    display: inline-block;
+    padding: 0;
+    width: 80px;
+    height: 32px;
+    border-radius: 27px;
+    background-color: #fff;
+    cursor: pointer;
+    user-select: none;
+    transition: all 300ms;
+    box-shadow:
+        0 0px 3px -4px rgba(0, 0, 0, 0.11),
+        0 0px 25px -4px rgba(0, 0, 0, 0.22);
+}
+.toggle input:checked + .circle {
+    background-color: #64e80a7d;
+    margin-left: 48px;
+}
+
+.toggle .circle {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin: 6px;
+    margin-top: -7px;
+    border-radius: 50%;
+    background-color: #ff28285c;
+    transition: all 300ms;
+}
+.toggle:hover {
+    box-shadow:
+        0 0px 3.3px -4px rgba(0, 0, 0, 0.249),
+        0 0px 26px -4px rgba(0, 0, 0, 0.6);
+}
+.form-group.checkbox{
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
+}
+
+/*///////// END Checkbox //////////////*/
 
 /*////////// CARD PRODUCT ///////////*/
 
@@ -259,6 +301,9 @@ html{
 .profile .formAccount.Register {
     width: 75%;
 }
+.addresses .formAccount form{
+    margin:auto;
+}
 
 /*//////////// END ACCOUNT ///////////////*/
 
@@ -333,6 +378,9 @@ html{
 
 .checkout .formAccount form{
     margin:auto;
+}
+.recapitulatifSection{
+    margin-top: 3em;
 }
 .recapitulatifSection>div{
     display: flex;
@@ -441,3 +489,4 @@ html{
     background-color: #64e80a7d;
 }
 /*////////// END CART  /////////////////*/
+

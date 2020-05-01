@@ -10,6 +10,6 @@
             @endif
         </ul>
     </nav>
-    <h1><img src="{{ asset('pictures/ponyo.png') }}" alt="logo Ponyo">Ponyo e-Commerce</h1>
+    <h1><img src="{{ asset('pictures/ponyo.png') }}" alt="logo Ponyo">Ponyo Ecommerce</h1>
     <span>Copyright @Ponyo</span>
 </div>

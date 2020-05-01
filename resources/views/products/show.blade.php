@@ -1,13 +1,14 @@
 @extends('layout')
 @section('featured-section')
-<a class="breadcrumb" href="{{URL::previous()}}">Dernière page visitée</a>
+@if (session()->has('success_message'))
 <section class="containerMessages">
-    @if (session()->has('success_message'))
     <div class="alert alert-success">
         {{ session()->get('success_message') }}
     </div>
-    @endif
 </section>
+@else
+<a class="breadcrumb" href="{{URL::previous()}}">Dernière page visitée</a>
+@endif
 <section class="oneProductSection">
     <h1>{{$product->title}}</h1>
     <div>

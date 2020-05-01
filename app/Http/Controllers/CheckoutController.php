@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use helpers;
 use App\Cart;
 use App\Address;
 use App\Product;
@@ -13,6 +14,8 @@ use App\Mail\CheckoutCompletedMail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 
 class CheckoutController extends Controller
@@ -20,7 +23,14 @@ class CheckoutController extends Controller
 
 
     public function index(){
-        return view('checkout.index');
+        $address=null;
+        if(Auth::user()){
+            $user_id = Auth::user()->id;
+            $address = Address::where(['user_id'=> $user_id, 'type'=> 'facturation'])->orderBy('updated_at')->first(); 
+        }elseif (session()->get('address')) {
+            $address = session()->get('address');
+        }
+        return view('checkout.index', ['address'=> $address]);
     }
 
     /**
@@ -28,6 +38,7 @@ class CheckoutController extends Controller
      *Si tout est Ok -> Etape de facturation
      */
     public function store(){
+        
         request()->validate([
             'name1' => ['required'],
             'line1' => ['required'],
@@ -35,19 +46,46 @@ class CheckoutController extends Controller
             'city' => ['required'],
 
         ]);
-        $address = Address::create([
-            'name1' => request('name1'),
-            'line1' => request('line1'),
-            'line2' => request('line2'),
-            'line3' => request('line3'),
-            'postcode' => request('postcode'), 
-            'city' => request('city'),
-            'country' => request('country'),
-        ]); 
-        session()->put('address', $address);
-        //dd(session('cart'));
-        return view('checkout.paiement', ['address'=> $address, 'productsWithQuantities' => Cart::fromSession()]);
-    
+        $user_id = null;
+        if(Auth::user()){
+            $user_id = Auth::user()->id;
+        }
+        if(request()->formType === 'livraison'){
+
+            $address = Address::create([
+                'name1' => request('name1'),
+                'user_id' => $user_id,
+                'line1' => request('line1'),
+                'line2' => request('line2'),
+                'type' => 'livraison',
+                'postcode' => request('postcode'), 
+                'city' => request('city'),
+                'country' => request('country'),
+                ]); 
+            session()->put('address', $address);
+            
+            
+            if(request()->typeaddress){
+                return view('checkout.paiement', ['address'=> $address, 'productsWithQuantities' => Cart::fromSession()]);
+            }else{
+                return view('checkout.addressbilling');
+            }
+        }elseif(request()->formType === 'facturation'){
+            $address = Address::create([
+                'name1' => request('name1'),
+                'user_id' => $user_id,
+                'line1' => request('line1'),
+                'line2' => request('line2'),
+                'type' => 'facturation',
+                'postcode' => request('postcode'), 
+                'city' => request('city'),
+                'country' => request('country'),
+                ]); 
+            session()->put('address2', $address);
+            
+            return view('checkout.paiement', ['address'=> $address, 'productsWithQuantities' => Cart::fromSession()]);
+        }
+                
     }
 
     /**
@@ -62,7 +100,9 @@ class CheckoutController extends Controller
         $cart = Cart::fromSession();
         $address = session()->get('address');
         $retourStripe = app(Stripe1::class)->charge(request('stripeToken'), $cart->totalPriceInCents());
-        
+
+        $this->writeLog($retourStripe);
+
         if($retourStripe->paid === true && $retourStripe->status === "succeeded"){
             if(Auth::user()){
                 $checkout = Checkout::create([
@@ -85,6 +125,7 @@ class CheckoutController extends Controller
             
             Mail::to(request("stripeEmail"))->send(new CheckoutCompletedMail($checkout, Address::find($address->id) )) ;
 
+            
             session()->forget('cart');
 
             return view('checkout.valid')->with(['last4'=>$retourStripe->source->last4, 'name'=>$address->name1, 'email'=>\request('stripeEmail')]);
@@ -111,5 +152,10 @@ class CheckoutController extends Controller
         }
         // dd($array);
         return view('checkout.recap', ['listingProducts' => $array, 'total'=>$total]);
+    }
+
+    private function writeLog($data){
+       
+        Storage::append('logStripe.txt', $data, 'private');
     }
 }

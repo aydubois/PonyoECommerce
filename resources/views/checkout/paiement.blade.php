@@ -5,7 +5,15 @@
 'enAttente'])
 
 <section class="recapitulatifSection">
-
+    @isset ($errors )
+<section class="containerMessages">
+    <div class="alert alert-danger">
+        <p>Une erreur s'est produite lors du paiement.<br/>
+            Votre carte n'est peut-être pas compatible, veuillez contacter votre banque.
+        </p>
+    </div>
+</section>
+@endisset
     <h1>Récapitulatif de la commande</h1>
     <div>
         <div class="recapPanier">

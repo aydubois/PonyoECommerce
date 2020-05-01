@@ -23,5 +23,15 @@ Route::post('/checkout', 'CheckoutController@store')->name('checkout.store'); //
 Auth::routes();
 Route::get('/account', 'AccountController@index')->name('account.index')->middleware('auth');
 Route::patch('/account', 'AccountController@update')->name('account.update')->middleware('auth');
+
+Route::get('/account/adresse', 
+'AccountController@address')->name('account.address');
+Route::post('/account/adresse', 
+'AccountController@addAddress')->name('account.addAddress')->middleware('auth');
+Route::patch('/account/adresse', 'AccountController@patchAddress')->name('account.patchAddress')->middleware('auth');
+
+
 Route::get('/account/{id?}/orders', 'AccountController@orders')->name('account.orders')->middleware('auth');
+
+
 Route::get('/logout', ['uses' => 'Auth\LoginController@logout'])->name('logout')->middleware('auth');

@@ -7,6 +7,7 @@
         <ul>
             <li class="active"><a href="{{ route('account.index') }}">Mon profil</a></li>
             <li><a href="{{ route('account.orders', ['id'=> Auth::user()->id]) }}">Mes commandes</a></li>
+            <li><a href="{{ route('account.address', ['id'=> Auth::user()->id]) }}">Mon adresse</a></li>
         </ul>
     </nav> <!-- end sidebar -->
     <div class="profile">

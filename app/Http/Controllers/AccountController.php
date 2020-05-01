@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Address;
 use App\Product;
 use App\Checkout;
 use App\ProductWithQuantity;
@@ -11,7 +12,10 @@ use Illuminate\Support\Facades\Auth;
 class AccountController extends Controller
 {
     public function index(){
-        return view('account.index')->with('user', auth()->user());
+        $user_id = auth()->user()->id;
+        
+        return view('account.index')->with( 'user', auth()->user());
+
     }
 
     public function update(){
@@ -67,5 +71,60 @@ class AccountController extends Controller
         }
         
         return view('account.orders', ['checkouts'=> $array]);
+    }
+    public function address(){
+        $user_id = auth()->user()->id;
+        $addresses = Address::where(['user_id'=> $user_id, 'type'=> 'facturation'])->orderBy('updated_at')->first();
+        $nbaddresses = Address::where(['user_id'=> $user_id, 'type'=> 'facturation'])->count();
+        
+        return view('account.address')->with(['Address'=> $addresses, 'user'=> auth()->user(), 'nbAddress'=>$nbaddresses]);
+    }
+    public function addAddress(){
+        request()->validate([
+            'name1' => ['required'],
+            'line1' => ['required'],
+            'postcode' => ['required'],
+            'city' => ['required'],
+            'country' => ['required'],
+            'user_id' => ['required']
+
+        ]);
+        $address = Address::create([
+            'name1' => request('name1'),
+            'user_id' => request('user_id'),
+            'line1' => request('line1'),
+            'line2' => request('line2'),
+            'line3' => request('line3'),
+            'postcode' => request('postcode'), 
+            'city' => request('city'),
+            'country' => request('country'),
+        ]); 
+        session()->put('address', $address);
+        return back()->with('success_message', 'Ton adresse a bien été mise à jour!');
+    }
+    public function patchAddress(){
+        request()->validate([
+            'name1' => ['required'],
+            'line1' => ['required'],
+            'postcode' => ['required'],
+            'city' => ['required'],
+            'country' => ['required'],
+            'user_id' => ['required']
+        ]);
+        $user_id = Auth::user()->id;
+        $address = Address::where(['user_id'=> $user_id, 'type'=> 'facturation'])->orderBy('updated_at')->first(); 
+        $newAddress = Address::find($address->id)->update([
+            'name1' => request('name1'),
+            'line1' => request('line1'),
+            'line2' => request('line2'),
+            'line3' => request('line3'),
+            'postcode' => request('postcode'), 
+            'city' => request('city'),
+            'country' => request('country'),
+        ]);
+        session()->put('address', $newAddress);
+
+        return back()->with('success_message', 'Ton adresse a bien été mise à jour!');
+    
     }
 }

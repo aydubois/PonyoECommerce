@@ -15,20 +15,19 @@ class Stripe1
     public static function charge($token, $amount){
         \Stripe\Stripe::setApiKey('sk_test_5mRUCY5Sh0YkQrjxE8r27zpV00bhJXXf8l');
 
-        // `source` is obtained with Stripe.js; see https://stripe.com/docs/payments/accept-a-payment-charges#web-create-token
         try{
             $charge = \Stripe\Charge::create([
                 'amount' => $amount,
                 'currency' => 'eur',
                 'source' => $token,
-                'description' => 'My First Test Charge (created for API docs)',
+                'description' => 'Site Ponyo Ecommerce, vente d\'animaux en ligne',
                 ]);
-                
-                //return $charge->source->last4;
                 return $charge;
-        }catch(InvalidRequest $e){
-            throw new StripeException;
-        }
+            } catch (\Stripe\Exception\CardException $e) {
+            
+                return view('checkout.paiement', ['address'=> session()->get('address'), 'productsWithQuantities' => Cart::fromSession()])->withErrors('error');
+            }
+    
     }
 
 }

@@ -3,6 +3,7 @@
 
 
 <div class="allOrders Cart">
+    <h1> Récapitulatif de votre commande </h1>
         @foreach ($listingProducts as $product)
     <div class="order flex Recap">
 
